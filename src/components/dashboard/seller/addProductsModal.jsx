@@ -1,6 +1,6 @@
 "use client";
 
-import { AddProducts } from "@/lib/api/products";
+import { AddProducts } from "@/lib/action/products";
 import { imageUpload } from "@/lib/imageUpload";
 import { Button, Input, Label, Modal, Surface, TextField, TextArea } from "@heroui/react";
 
