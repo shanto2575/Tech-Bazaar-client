@@ -1,18 +1,13 @@
 'use server'
 
-import { headers } from "next/headers"
-import { auth } from "../auth"
+import { getTokenServer } from "../token/getTokenServer"
 
-// import { authClient } from "../auth-client"
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL
 
 export const AddProducts=async(product)=>{
-    // const {data:tokeData}=await authClient.token()
-    // console.log(tokeData.token)
-    const {token}=await auth.api.getToken({
-        headers:await headers()
-    })
+    
+    const token=await getTokenServer()
     const res=await fetch(`${baseUrl}/seller/products`,{
         method:'POST',
         headers:{
