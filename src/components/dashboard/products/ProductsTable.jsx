@@ -1,0 +1,73 @@
+import { Pagination, Table } from "@heroui/react";
+import Link from "next/link";
+
+export function ProductsTable({ productsData }) {
+    const products = productsData.data;
+    const page = productsData.page;
+    const pages = []
+    const totalPages = productsData.totalPage;
+    for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+    }
+    // console.log(pages)
+    return (
+        <Table>
+            <Table.ScrollContainer>
+                <Table.Content aria-label="Team members" className="min-w-[600px] ">
+                    <Table.Header>
+                        <Table.Column isRowHeader>#</Table.Column>
+                        <Table.Column>Title</Table.Column>
+                        <Table.Column>Price</Table.Column>
+                        <Table.Column>Quantity</Table.Column>
+                    </Table.Header>
+                    <Table.Body>
+                        {
+                            products.map((product, index) => <Table.Row key={product._id}>
+                                <Table.Cell>{index + 1}</Table.Cell>
+                                <Table.Cell>{product.title}</Table.Cell>
+                                <Table.Cell>{product.price}</Table.Cell>
+                                <Table.Cell>{product.quantity}</Table.Cell>
+                            </Table.Row>)
+                        }
+                    </Table.Body>
+                </Table.Content>
+            </Table.ScrollContainer>
+            <Table.Footer >
+                <Pagination size="sm" className="flex items-center justify-center">
+                    <Pagination.Content>
+                        <Pagination.Item>
+                            <Pagination.Previous
+                                isDisabled={page === 1}
+
+                            >
+                                <Link href={`/dashboard/seller/products?page=${page-1}`} className='flex'>
+                                    <Pagination.PreviousIcon />
+                                    Prev
+                                </Link>
+                            </Pagination.Previous>
+                        </Pagination.Item>
+                        {pages.map((p) => (
+                            <Pagination.Item key={p}>
+                                <Link href={`/dashboard/seller/products?page=${p}`}>
+                                    <Pagination.Link className={`${p===page && 'bg-blue-600 text-white'}`} isActive={p === page} >
+                                        {p}
+                                    </Pagination.Link>
+                                </Link>
+                            </Pagination.Item>
+                        ))}
+                        <Pagination.Item>
+                            <Pagination.Next
+                                isDisabled={page === totalPages}
+                            >
+                                <Link href={`/dashboard/seller/products?page=${page+1}`} className='flex'>
+                                Next
+                                <Pagination.NextIcon />
+                                </Link>
+                            </Pagination.Next>
+                        </Pagination.Item>
+                    </Pagination.Content>
+                </Pagination>
+            </Table.Footer>
+        </Table>
+    );
+}

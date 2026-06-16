@@ -1,4 +1,4 @@
-import { subscription } from '@/lib/action/payments'
+import { payments, subscription } from '@/lib/action/payments'
 import { stripe } from '@/lib/stripe'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,13 +24,14 @@ export default async function Success({ searchParams }) {
     }
 
     if (status === 'complete') {
-        console.log()
-        await subscription({ ...metadata, sessionId: session_id })
+        // console.log(metadata)
+        await payments({...metadata,sessionId:session_id})
+        
 
         return (
             <section
                 id="success"
-                className="min-h-[80vh] flex items-center justify-center p-4 bg-[#09090b]"
+                className="min-h-[80vh] flex items-center justify-center p-4 "
             >
                 <div className="w-full max-w-md bg-[#18181b]/80 border border-zinc-800/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl flex flex-col items-center text-center relative overflow-hidden group">
 

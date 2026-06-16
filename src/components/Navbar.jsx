@@ -15,10 +15,10 @@ const Navbar = () => {
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  
-  const pathname=usePathname()
+
+  const pathname = usePathname()
   // console.log(pathname)
-  if(pathname.includes('dashboard')){
+  if (pathname.includes('dashboard')) {
     return null;
   }
 
@@ -84,7 +84,7 @@ const Navbar = () => {
           <ul className="hidden items-center gap-4 md:flex">
             <li>
               <Link
-                href="#"
+                href="/products"
                 className="font-medium text-accent"
                 aria-current="page"
               >
@@ -95,7 +95,7 @@ const Navbar = () => {
               <Link href="/pricing">Pricing</Link>
             </li>
           </ul>
-         {!user && (
+          {!user && (
             <div className="hidden items-center gap-4 md:flex">
               <Link href="/signin">Login</Link>
               <Link href="/signup">

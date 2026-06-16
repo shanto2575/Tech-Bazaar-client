@@ -13,3 +13,16 @@ export const subscription = async (data) => {
     const resData = await res.json();
     return resData;
 }
+export const payments = async (data) => {
+    const res = await fetch(`${baseUrl}/payments`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    const resData = await res.json();
+    return resData;
+}
+
+
